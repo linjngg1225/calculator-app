@@ -1,5 +1,6 @@
 let display = document.getElementById('display');
 let currentInput = '0';
+let memoryValue = 0;
 
 function updateDisplay() {
     display.textContent = currentInput;
@@ -41,7 +42,6 @@ function calculate() {
         }, 1500);
     }
 }
-// 在 script.js 末尾增加
 function calculatePercentage() {
     try {
         currentInput = (eval(currentInput) / 100).toString();
@@ -54,4 +54,41 @@ function calculatePercentage() {
             updateDisplay();
         }, 1500);
     }
+}
+function memoryAdd() {
+    try {
+        const currentValue = eval(currentInput);
+        memoryValue += currentValue;
+        showMemoryIndicator();
+    } catch (error) {
+        console.error('Memory add error:', error);
+    }
+}
+
+function memorySubtract() {
+    try {
+        const currentValue = eval(currentInput);
+        memoryValue -= currentValue;
+        showMemoryIndicator();
+    } catch (error) {
+        console.error('Memory subtract error:', error);
+    }
+}
+
+function memoryRecall() {
+    currentInput = memoryValue.toString();
+    updateDisplay();
+}
+
+function memoryClear() {
+    memoryValue = 0;
+    hideMemoryIndicator();
+}
+
+function showMemoryIndicator() {
+    display.style.borderLeft = '5px solid #ff9800';
+}
+
+function hideMemoryIndicator() {
+    display.style.borderLeft = 'none';
 }
