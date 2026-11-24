@@ -92,3 +92,23 @@ function showMemoryIndicator() {
 function hideMemoryIndicator() {
     display.style.borderLeft = 'none';
 }
+
+function scientificCalc(operation) {
+    try {
+        const value = eval(currentInput);
+        const operations = {
+            sin: () => Math.sin(value * Math.PI / 180),
+            cos: () => Math.cos(value * Math.PI / 180),
+            tan: () => Math.tan(value * Math.PI / 180),
+            log: () => Math.log10(value),
+            sqrt: () => Math.sqrt(value),
+            pow: () => Math.pow(value, 2)
+        };
+        currentInput = operations[operation]().toString();
+        updateDisplay();
+    } catch (error) {
+        currentInput = 'Error';
+        updateDisplay();
+        setTimeout(clearDisplay, 1500);
+    }
+}
